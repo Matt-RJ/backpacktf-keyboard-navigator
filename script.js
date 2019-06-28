@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Backpack.tf Keyboard Navigator
-// @version      1.02
+// @version      1.03
 // @description  Allows for the use of the left and right keyboard keys to navigate backpack.tf classifieds and premium search pages.
 // @author       Matt-RJ
 // @match        *backpack.tf/*
@@ -8,6 +8,8 @@
 // ==/UserScript==
 
 var openingNewPage = false;
+var isFirstPage;
+var isLastPage;
 
 window.onkeydown = function(e) {
 
@@ -15,11 +17,11 @@ window.onkeydown = function(e) {
     var nextButton = document.getElementsByClassName('fa fa-angle-right')[0];
 
     try {
-        var isFirstPage = prevButton.parentElement.parentElement.className == "disabled";
-        var isLastPage = nextButton.parentElement.parentElement.className == "disabled";
+        isFirstPage = prevButton.parentElement.parentElement.className == "disabled";
+        isLastPage = nextButton.parentElement.parentElement.className == "disabled";
     }
     catch(error) {
-        console.log("This page has no next/previous navigation.");
+        // No navigation present.
     }
 
     if (!openingNewPage) {
